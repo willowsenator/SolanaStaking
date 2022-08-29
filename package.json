@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "validators": "tsc ./src/get_validators.ts && node ./src/get_validators.js"
+    "validators": "tsc ./src/get_validators.ts && node ./src/get_validators.js",
+    "create_stake_account": "tsc ./src/create_stake_account.ts && node ./src/create_stake_account.js"
   },
   "repository": {
     "type": "git",
