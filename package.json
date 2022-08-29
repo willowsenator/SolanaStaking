@@ -7,7 +7,8 @@
     "validators": "tsc ./src/get_validators.ts && node ./src/get_validators.js",
     "create_stake_account": "tsc ./src/create_stake_account.ts && node ./src/create_stake_account.js",
     "delegate_to_validator": "tsc ./src/delegate_to_validator.ts && node ./src/delegate_to_validator.js",
-    "get_delegators_by_validator": "tsc ./src/get_delegators_by_validator.ts && node ./src/get_delegators_by_validator.js"
+    "get_delegators_by_validator": "tsc ./src/get_delegators_by_validator.ts && node ./src/get_delegators_by_validator.js",
+    "deactivate_stake": "tsc ./src/deactivate_stake.ts && node ./src/deactivate_stake.js"
   },
   "repository": {
     "type": "git",

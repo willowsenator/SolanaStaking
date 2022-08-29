@@ -20,7 +20,7 @@ const main = async()=>{
    const minimunToRent = await connection.getMinimumBalanceForRentExemption(StakeProgram.space);
    const amountUserWantsToStake = 0.5 * LAMPORTS_PER_SOL;
    const amountToStake = amountUserWantsToStake + minimunToRent;
-   const createStakeAccountTx = await StakeProgram.createAccount({
+   const createStakeAccountTx = StakeProgram.createAccount({
        lamports: amountToStake,
        lockup: new Lockup(0,0, wallet.publicKey),
        fromPubkey: wallet.publicKey,
