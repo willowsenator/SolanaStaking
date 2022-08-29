@@ -2,7 +2,7 @@ import {
     Connection,
     clusterApiUrl,
     Keypair,
-    LAMPORTS_PER_SOL, StakeProgram, Lockup, Authorized, sendAndConfirmTransaction
+    LAMPORTS_PER_SOL, StakeProgram, Lockup, Authorized, sendAndConfirmTransaction, PublicKey
 } from "@solana/web3.js"
 const main = async()=>{
     const connection = new Connection(clusterApiUrl('devnet'), 'processed');
@@ -29,11 +29,25 @@ const main = async()=>{
    });
    const createStakeAccountTxId = await sendAndConfirmTransaction(connection, createStakeAccountTx,[wallet, stakeAccount]);
 
-   console.log(`Stake account created. TxId: ${createStakeAccountTxId}`);
-   let stakeBalance = await connection.getBalance(stakeAccount.publicKey);
-   console.log(`Stake account balance. ${stakeBalance/LAMPORTS_PER_SOL} SOL`);
-   let stakeStatus = await connection.getStakeActivation(stakeAccount.publicKey);
-   console.log(`Stake status. ${stakeStatus.state}`);
+    console.log(`Stake account created. TxId: ${createStakeAccountTxId}`);
+    let stakeBalance = await connection.getBalance(stakeAccount.publicKey);
+    console.log(`Stake account balance. ${stakeBalance/LAMPORTS_PER_SOL} SOL`);
+    let stakeStatus = await connection.getStakeActivation(stakeAccount.publicKey);
+    console.log(`Stake Account status:. ${stakeStatus.state}`);
+
+   const validators = await connection.getVoteAccounts();
+   const selectedValidator = validators.current[0];
+   const selectedValidatorPubkey = new PublicKey(selectedValidator.votePubkey);
+   const delegateTx = await StakeProgram.delegate({
+       authorizedPubkey: wallet.publicKey,
+       stakePubkey: stakeAccount.publicKey,
+       votePubkey: selectedValidatorPubkey
+
+   });
+   const delegateTxId = await sendAndConfirmTransaction(connection, delegateTx, [wallet]);
+   console.log(`Stake Account delegated to ${selectedValidatorPubkey}. Tx Id: ${delegateTxId}`);
+   stakeStatus = await connection.getStakeActivation(stakeAccount.publicKey);
+   console.log(`Stake Account status: ${stakeStatus.state}`);
 }
 
 const runMain = async()=>{

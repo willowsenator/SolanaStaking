@@ -15,4 +15,4 @@ const runMain = async()=>{
         console.error(error);
     }
 }
-runMain().then(() => console.log("Getting validators OK"));
+runMain();
