@@ -1,0 +1,23 @@
+{
+  "name": "staking",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "validators": "tsc ./src/get_validators.ts && node ./src/get_validators.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willowsenator/SolanaStaking.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/willowsenator/SolanaStaking/issues"
+  },
+  "homepage": "https://github.com/willowsenator/SolanaStaking#readme",
+  "dependencies": {
+    "@solana/web3.js": "^1.54.1"
+  }
+}
